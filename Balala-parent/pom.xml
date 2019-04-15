@@ -20,6 +20,7 @@
         <module>../Balala-service-product</module>
         <module>../Balala-service-cms</module>
         <module>../Balala-dao</module>
+        <module>../Balala-service-cob</module>
     </modules>
 
 </project>
