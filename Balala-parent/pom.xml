@@ -10,6 +10,16 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>../Balala-common</module>
+        <module>../Balala-pojo</module>
+        <module>../Balala-interface</module>
+        <module>../Balala-console</module>
+        <module>../Balala-protal</module>
+        <module>../Balala-login</module>
+        <module>../../Balalat/Balala-service-cob</module>
+        <module>../Balala-service-solr</module>
+        <module>../Balala-service-product</module>
+        <module>../Balala-service-cms</module>
+        <module>../Balala-dao</module>
     </modules>
 
 </project>
