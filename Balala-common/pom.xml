@@ -2,14 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>Balala-parent</artifactId>
+        <groupId>com.layman</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../Balala-parent/pom.xml</relativePath>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.layman</groupId>
-    <artifactId>Balala-parent</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>../Balala-common</module>
-    </modules>
+    <artifactId>Balala-common</artifactId>
+
 
 </project>
