@@ -13,4 +13,17 @@
     <artifactId>Balala-service-product</artifactId>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>com.layman</groupId>
+            <artifactId>Balala-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.layman</groupId>
+            <artifactId>Balala-dao</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

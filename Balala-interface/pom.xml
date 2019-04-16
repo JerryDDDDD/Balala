@@ -13,4 +13,12 @@
     <artifactId>Balala-interface</artifactId>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>com.layman</groupId>
+            <artifactId>Balala-pojo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 </project>

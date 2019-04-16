@@ -13,4 +13,12 @@
     <artifactId>Balala-protal</artifactId>
     <packaging>war</packaging>
 
+    <dependencies>
+        <!-- Balala-interface -->
+        <dependency>
+            <groupId>com.layman</groupId>
+            <artifactId>Balala-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

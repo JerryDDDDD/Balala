@@ -12,5 +12,12 @@
 
     <artifactId>Balala-pojo</artifactId>
 
-
+    <dependencies>
+        <!-- Balala-common -->
+        <dependency>
+            <groupId>com.layman</groupId>
+            <artifactId>Balala-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
