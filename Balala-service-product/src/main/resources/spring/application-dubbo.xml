@@ -20,19 +20,15 @@
 		http://code.alibabatech.com/schema/dubbo
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <!-- 扫描 @Contr -->
-    <context:component-scan base-package="com.layman"/>
-
-    <!-- 处理器 映射器  适配器 -->
-    <mvc:annotation-driven/>
-    <!-- 视图解释器 jsp -->
-    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/console/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
-
-
-    <import resource="application-dubbo-consumer.xml"/>
-
-
+    <!-- Dobbo provider -->
+    <!-- 1.名字 区分计算机 名字唯一 -->
+    <dubbo:application name="balala-service-product"/>
+    <!-- 2.设置注册中心 地址 zookeeper地址 -->
+    <dubbo:registry address="192.168.219.81:2181" protocol="zookeeper"></dubbo:registry>
+    <!-- zookeeper 集群用逗号隔开 -->
+    <!--<dubbo:registry address="192.168.219.81:2181,192.168.219.81:2181,192.168.219.81:2181" protocol="zookeeper"></dubbo:registry>-->
+    <!-- 3.对外提供服务的端口号 默认20880 -->
+    <dubbo:protocol port="20880" name="dubbo"/>
+    <!-- 4.暴露实现类 -->
+    <dubbo:service interface="com.layman.core.service.TestTbService" ref="testTbServiceImpl"/>
 </beans>

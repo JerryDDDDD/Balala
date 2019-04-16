@@ -1,5 +1,6 @@
 package com.layman.core.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
  * @Data 2019/4/15 21:28
  * @Version 3.0
  **/
-public class TestTb {
+public class TestTb implements Serializable {
 
 
     private Integer id;

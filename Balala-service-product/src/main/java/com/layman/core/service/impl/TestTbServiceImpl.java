@@ -1,7 +1,8 @@
-package com.layman.core.service;
+package com.layman.core.service.impl;
 
 import com.layman.core.bean.TestTb;
 import com.layman.core.dao.TestTbDao;
+import com.layman.core.service.TestTbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @Data 2019/4/15 22:06
  * @Version 3.0
  **/
-@Service
+@Service("testTbServiceImpl")
 @Transactional
 public class TestTbServiceImpl implements TestTbService {
 
