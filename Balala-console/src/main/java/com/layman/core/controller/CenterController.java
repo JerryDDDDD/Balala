@@ -4,6 +4,7 @@ import com.layman.core.bean.TestTb;
 import com.layman.core.service.TestTbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
@@ -19,15 +20,40 @@ import java.util.Date;
 @RequestMapping("/center")
 public class CenterController {
 
-    @Autowired
-    private TestTbService testTbService;
+//    @Autowired
+//    private TestTbService testTbService;
+//
+//    @RequestMapping(value = "/test/index.do")
+//    public String test(){
+//        TestTb testTb = new TestTb();
+//        testTb.setName("啊啊啊啊");
+//        testTb.setBirthday(new Date());
+//        testTbService.insertTestTb(testTb);
+//        return "/index";
+//    }
+    @RequestMapping(value = "/index.do")
+    public String index(Model model){
+        return "index";
+    }
+    @RequestMapping(value = "/top.do")
+    public String top(Model model){
+        return "top";
+    }
+    @RequestMapping(value = "/main.do")
+    public String main(Model model){
+        return "main";
+    }
+    @RequestMapping(value = "/left.do")
+    public String left(Model model){
+        return "left";
+    }
+    @RequestMapping(value = "/right.do")
+    public String right(Model model){
+        return "right";
+    }
 
-    @RequestMapping(value = "/test/index.do")
-    public String test(){
-        TestTb testTb = new TestTb();
-        testTb.setName("啊啊啊啊");
-        testTb.setBirthday(new Date());
-        testTbService.insertTestTb(testTb);
-        return "/index";
+    @RequestMapping("/frame/product_main")
+    public String product_main(Model model) {
+        return "frame/product_main";
     }
 }

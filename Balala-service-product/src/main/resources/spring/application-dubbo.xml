@@ -24,7 +24,9 @@
     <!-- 1.名字 区分计算机 名字唯一 -->
     <dubbo:application name="balala-service-product"/>
     <!-- 2.设置注册中心 地址 zookeeper地址 -->
-    <dubbo:registry address="192.168.219.81:2181" protocol="zookeeper"></dubbo:registry>
+    <!--<dubbo:registry address="192.168.219.81:2181" protocol="zookeeper"></dubbo:registry>-->
+    <!-- 提供服务不注册 -->
+    <dubbo:registry address="N/A" protocol="zookeeper"></dubbo:registry>
     <!-- zookeeper 集群用逗号隔开 -->
     <!--<dubbo:registry address="192.168.219.81:2181,192.168.219.81:2181,192.168.219.81:2181" protocol="zookeeper"></dubbo:registry>-->
     <!-- 3.对外提供服务的端口号 默认20880 -->
