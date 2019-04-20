@@ -56,4 +56,14 @@ public class CenterController {
     public String product_main(Model model) {
         return "frame/product_main";
     }
+
+    @RequestMapping("/product/list")
+    public String product_list(){
+        return "product/list";
+    }
+
+    @RequestMapping("/frame/product_left")
+    public String product_left() {
+        return "frame/product_left";
+    }
 }
