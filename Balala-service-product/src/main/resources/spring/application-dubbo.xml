@@ -34,4 +34,5 @@
     <!-- 4.暴露实现类 -->
     <dubbo:service interface="com.layman.core.service.TestTbService" ref="testTbServiceImpl"/>
     <dubbo:service interface="com.layman.core.service.product.BrandService" ref="brandServiceImpl"/>
+    <dubbo:service interface="com.layman.core.service.product.UploadService" ref="uploadServiceImpl"/>
 </beans>

@@ -4,6 +4,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>babasport-edit</title>
+    <script type="text/javascript">
+        function uploadPic() {
+            var options = {
+                url: "/upload/uploadPic.do",
+                dataType: "json",
+                success: function (res) {
+                    $("#allUrl").attr("src", res.url);
+                    $("#imgUrl").val(res.url);
+                }
+            }
+            $("#jvForm").ajaxSubmit(options);
+        }
+    </script>
 </head>
 <body>
 <div class="box-positon">
@@ -15,6 +28,7 @@
 </div>
 <div class="body-box" style="float:right">
     <form id="jvForm" action="edit.do" method="post">
+        <input type="hidden" value="${brand.id}" name="id"/>
         <table cellspacing="1" cellpadding="2" width="100%" border="0" class="pn-ftable">
             <tbody>
             <tr>
