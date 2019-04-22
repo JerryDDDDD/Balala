@@ -1,6 +1,7 @@
 package com.layman.core.service.product;
 
 import cn.itcast.common.page.Pagination;
+import com.layman.core.bean.product.Brand;
 
 /**
  * @InterfaceName BrandService
@@ -12,4 +13,7 @@ import cn.itcast.common.page.Pagination;
 public interface BrandService {
 
     public Pagination selectPaginationByQuery(String name, Integer isDisplay, Integer pageNo);
+
+    // 通过Id查询品牌
+    public Brand selectBrandById(Long id);
 }

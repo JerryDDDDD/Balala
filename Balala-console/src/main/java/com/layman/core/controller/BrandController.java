@@ -1,6 +1,7 @@
 package com.layman.core.controller;
 
 import cn.itcast.common.page.Pagination;
+import com.layman.core.bean.product.Brand;
 import com.layman.core.service.product.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,5 +34,14 @@ public class BrandController {
             model.addAttribute("isDisplay", 1);
         }
         return "brand/list";
+    }
+
+    // 去修改页面
+    @RequestMapping("/brand/toEdit.do")
+    public String toEdit(Model model, Long id){
+
+        Brand brand = brandService.selectBrandById(id);
+        model.addAttribute("brand", brand);
+        return "brand/edit";
     }
 }
