@@ -19,4 +19,7 @@ public interface BrandService {
 
     // 修改
     public void updateBrandById(Brand brand);
+
+    //删除
+    public void deletes(Long[] ids);
 }

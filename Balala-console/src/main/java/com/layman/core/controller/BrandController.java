@@ -53,4 +53,10 @@ public class BrandController {
         // 重定向
         return "redirect:/brand/list.do";
     }
+
+    @RequestMapping("/brand/deletes.do")
+    public String deletes(Long[] ids, String name, Integer isDisplay, Integer pageNo){
+        brandService.deletes(ids);
+        return "forward:/brand/list.do";
+    }
 }
