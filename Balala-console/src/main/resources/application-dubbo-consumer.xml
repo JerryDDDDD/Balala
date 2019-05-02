@@ -35,4 +35,5 @@
     <dubbo:reference interface="com.layman.core.service.TestTbService" url="dubbo://127.0.0.1:20880" id="testTbService" />
     <dubbo:reference interface="com.layman.core.service.product.BrandService" url="dubbo://127.0.0.1:20880" id="brandService" />
     <dubbo:reference interface="com.layman.core.service.product.UploadService" url="dubbo://127.0.0.1:20880" id="uploadService" />
+    <dubbo:reference interface="com.layman.core.service.product.ProductService" url="dubbo://127.0.0.1:20880" id="productService" />
 </beans>

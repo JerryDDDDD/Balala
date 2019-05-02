@@ -35,4 +35,5 @@
     <dubbo:service interface="com.layman.core.service.TestTbService" ref="testTbServiceImpl"/>
     <dubbo:service interface="com.layman.core.service.product.BrandService" ref="brandServiceImpl"/>
     <dubbo:service interface="com.layman.core.service.product.UploadService" ref="uploadServiceImpl"/>
+    <dubbo:service interface="com.layman.core.service.product.ProductService" ref="productServiceImpl"/>
 </beans>

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @ClassName BrandServiceImpl
  * @Description 品牌管理
@@ -76,5 +78,12 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public void deletes(Long[] ids) {
         brandDao.deletes(ids);
+    }
+
+
+    public List<Brand> selectBrandListByQuery(Integer isDisplay) {
+        BrandQuery brandQuery = new BrandQuery();
+        brandQuery.setIsDisplay(isDisplay);
+        return brandDao.selectBrandListByQuery(brandQuery);
     }
 }
