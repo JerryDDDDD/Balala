@@ -54,6 +54,9 @@ public class ProductController {
     @RequestMapping("/product/toAdd.do")
     public String toAdd(Model model) {
 
+        List<Brand> brands = brandService.selectBrandListByQuery(1);
+        model.addAttribute("brands", brands);
+
         List<Color> colors = productService.selectColorList();
         model.addAttribute("colors", colors);
         return "/product/add";
