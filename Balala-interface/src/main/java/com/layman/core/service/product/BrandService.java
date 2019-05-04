@@ -3,6 +3,8 @@ package com.layman.core.service.product;
 import cn.itcast.common.page.Pagination;
 import com.layman.core.bean.product.Brand;
 
+import java.util.List;
+
 /**
  * @InterfaceName BrandService
  * @Description TODO
@@ -22,4 +24,7 @@ public interface BrandService {
 
     //删除
     public void deletes(Long[] ids);
+
+
+    List<Brand> selectBrandListByQuery(Integer isDisplay);
 }

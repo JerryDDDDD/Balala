@@ -20,20 +20,11 @@
 		http://code.alibabatech.com/schema/dubbo
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <!-- Dobbo consumer -->
-    <!-- 1.名字 区分计算机 名字唯一 -->
-    <dubbo:application name="balala-console"/>
-    <!-- 2.设置注册中心 地址 zookeeper地址 -->
-    <!--<dubbo:registry address="192.168.219.81:2181" protocol="zookeeper" />-->
-    <!-- 配置不去注册中心取服务 -->
-    <dubbo:registry address="N/A" protocol="zookeeper" check="false"></dubbo:registry>
-    <!-- zookeeper 集群用逗号隔开 -->
-    <!--<dubbo:registry address="192.168.219.81:2181,192.168.219.81:2181,192.168.219.81:2181" protocol="zookeeper"></dubbo:registry>-->
-    <!-- 全局设置 -->
-    <dubbo:consumer timeout="600000" check="false"></dubbo:consumer>
-    <!-- 3. 调用接口对应的实现类 timeout 超时时间 默认1000ms -->
-    <dubbo:reference interface="com.layman.core.service.TestTbService" url="dubbo://127.0.0.1:20880" id="testTbService" />
-    <dubbo:reference interface="com.layman.core.service.product.BrandService" url="dubbo://127.0.0.1:20880" id="brandService" />
-    <dubbo:reference interface="com.layman.core.service.product.UploadService" url="dubbo://127.0.0.1:20880" id="uploadService" />
-    <dubbo:reference interface="com.layman.core.service.product.ProductService" url="dubbo://127.0.0.1:20880" id="productService" />
+
+<!--  redis 配置  -->
+    <bean id="jedis" class="redis.clients.jedis.Jedis">
+        <constructor-arg value="192.168.219.90" index="0" type="java.lang.String"></constructor-arg>
+        <constructor-arg value="6379" index="1"></constructor-arg>
+    </bean>
+
 </beans>
