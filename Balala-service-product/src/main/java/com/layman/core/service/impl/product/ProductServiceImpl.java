@@ -9,6 +9,7 @@ import com.layman.core.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import redis.clients.jedis.Jedis;
 
 import java.util.Date;
 import java.util.List;
@@ -33,6 +34,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private SkuDao skuDao;
+
+    @Autowired
+    private Jedis jedis;
+
 
     // 分页对象
     @Override
@@ -85,6 +90,8 @@ public class ProductServiceImpl implements ProductService {
     // 商品保存
     public void insertProduct(Product product) {
         // 保存商品
+        Long id = jedis.incr("pno");
+        product.setId(id);
         // 下架状态
         product.setIsShow(false);
         product.setIsDel(true);
