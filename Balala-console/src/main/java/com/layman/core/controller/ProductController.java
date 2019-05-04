@@ -3,12 +3,14 @@ package com.layman.core.controller;
 import cn.itcast.common.page.Pagination;
 import com.layman.core.bean.product.Brand;
 import com.layman.core.bean.product.Color;
+import com.layman.core.bean.product.Product;
 import com.layman.core.service.product.BrandService;
 import com.layman.core.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -60,5 +62,12 @@ public class ProductController {
         List<Color> colors = productService.selectColorList();
         model.addAttribute("colors", colors);
         return "/product/add";
+    }
+
+    // 商品保存
+    @RequestMapping("/product/add.do")
+    public String add(Product product) {
+        productService.insertProduct(product);
+        return "redirect:/product/list.do";
     }
 }

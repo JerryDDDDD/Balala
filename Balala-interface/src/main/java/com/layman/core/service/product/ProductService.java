@@ -2,6 +2,7 @@ package com.layman.core.service.product;
 
 import cn.itcast.common.page.Pagination;
 import com.layman.core.bean.product.Color;
+import com.layman.core.bean.product.Product;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface ProductService {
     public Pagination selectPaginationByQuery(Integer pageNo, String name, Long brandId, Boolean isShow);
 
     List<Color> selectColorList();
+
+    public void insertProduct(Product product);
 }
