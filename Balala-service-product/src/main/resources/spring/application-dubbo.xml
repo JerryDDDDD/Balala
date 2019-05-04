@@ -36,4 +36,5 @@
     <dubbo:service interface="com.layman.core.service.product.BrandService" ref="brandServiceImpl"/>
     <dubbo:service interface="com.layman.core.service.product.UploadService" ref="uploadServiceImpl"/>
     <dubbo:service interface="com.layman.core.service.product.ProductService" ref="productServiceImpl"/>
+    <dubbo:service interface="com.layman.core.service.product.SkuService" ref="skuServiceImpl"/>
 </beans>

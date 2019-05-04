@@ -20,4 +20,6 @@ public interface ProductService {
     List<Color> selectColorList();
 
     public void insertProduct(Product product);
+
+    void isShow(Long[] ids);
 }

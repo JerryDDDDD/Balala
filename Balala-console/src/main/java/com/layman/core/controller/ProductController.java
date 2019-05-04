@@ -70,4 +70,10 @@ public class ProductController {
         productService.insertProduct(product);
         return "redirect:/product/list.do";
     }
+
+    @RequestMapping("/product/isShow.do")
+    public String isShow(Long[] ids){
+        productService.isShow(ids);
+        return "forward:/product/list.do";
+    }
 }
