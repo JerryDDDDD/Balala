@@ -1,0 +1,40 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/task
+   		http://www.springframework.org/schema/task/spring-task-4.0.xsd
+		http://code.alibabatech.com/schema/dubbo
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- Dobbo consumer -->
+    <!-- 1.名字 区分计算机 名字唯一 -->
+    <dubbo:application name="balala-protal"/>
+    <!-- 2.设置注册中心 地址 zookeeper地址 -->
+    <!--<dubbo:registry address="192.168.219.81:2181" protocol="zookeeper" />-->
+    <!-- 配置不去注册中心取服务 -->
+    <dubbo:registry address="N/A" protocol="zookeeper" check="false"></dubbo:registry>
+    <!-- zookeeper 集群用逗号隔开 -->
+    <!--<dubbo:registry address="192.168.219.81:2181,192.168.219.81:2181,192.168.219.81:2181" protocol="zookeeper"></dubbo:registry>-->
+    <!-- 全局设置 -->
+    <dubbo:consumer timeout="600000" check="false"></dubbo:consumer>
+    <!-- 3. 调用接口对应的实现类 timeout 超时时间 默认1000ms -->
+    <dubbo:reference interface="com.layman.core.service.TestTbService" url="dubbo://127.0.0.1:20880" id="testTbService" />
+    <dubbo:reference interface="com.layman.core.service.product.BrandService" url="dubbo://127.0.0.1:20880" id="brandService" />
+    <dubbo:reference interface="com.layman.core.service.product.UploadService" url="dubbo://127.0.0.1:20880" id="uploadService" />
+    <dubbo:reference interface="com.layman.core.service.product.ProductService" url="dubbo://127.0.0.1:20880" id="productService" />
+    <dubbo:reference interface="com.layman.core.service.product.SkuService" url="dubbo://127.0.0.1:20880" id="skuService" />
+</beans>

@@ -13,13 +13,13 @@
         <module>../Balala-pojo</module>
         <module>../Balala-interface</module>
         <module>../Balala-console</module>
-        <module>../Balala-protal</module>
         <module>../Balala-login</module>
         <module>../Balala-service-solr</module>
         <module>../Balala-service-product</module>
         <module>../Balala-service-cms</module>
         <module>../Balala-dao</module>
         <module>../Balala-service-cob</module>
+        <module>../Balala-protal</module>
     </modules>
     <!-- 设置统一控制版本 -->
     <properties>
