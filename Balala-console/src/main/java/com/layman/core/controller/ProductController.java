@@ -6,12 +6,14 @@ import com.layman.core.bean.product.Color;
 import com.layman.core.bean.product.Product;
 import com.layman.core.service.product.BrandService;
 import com.layman.core.service.product.ProductService;
+import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -72,7 +74,7 @@ public class ProductController {
     }
 
     @RequestMapping("/product/isShow.do")
-    public String isShow(Long[] ids){
+    public String isShow(Long[] ids) throws IOException, SolrServerException {
         productService.isShow(ids);
         return "forward:/product/list.do";
     }

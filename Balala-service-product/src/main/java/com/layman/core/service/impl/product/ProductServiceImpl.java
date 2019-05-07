@@ -6,11 +6,15 @@ import com.layman.core.dao.product.ColorDao;
 import com.layman.core.dao.product.ProductDao;
 import com.layman.core.dao.product.SkuDao;
 import com.layman.core.service.product.ProductService;
+import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import redis.clients.jedis.Jedis;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +41,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private Jedis jedis;
+
+    @Autowired
+    private SolrServer solrServer;
 
 
     // 分页对象
@@ -124,13 +131,33 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void isShow(Long[] ids) {
+    public void isShow(Long[] ids) throws IOException, SolrServerException {
         Product product = new Product();
         // shang jia
         product.setIsShow(true);
         for (Long id : ids) {
             product.setId(id);
+            // 商品状态的变更
             productDao.updateByPrimaryKeySelective(product);
+
+            // 保存商品信息到Solr服务器
+            SolrInputDocument doc = new SolrInputDocument();
+            // 商品ID 图片 价格 商品名称 品牌id 时间 可选
+            doc.setField("id", id);
+            Product p = productDao.selectByPrimaryKey(id);
+            doc.setField("name_ik",p.getName());
+            doc.setField("url",p.getImages()[0]);
+            // 查询售价
+            SkuQuery skuQuery = new SkuQuery();
+            skuQuery.createCriteria().andProductIdEqualTo(id);
+            skuQuery.setOrderByClause("price asc");
+            skuQuery.setPageNo(1);
+            skuQuery.setPageSize(1);
+           // List<Sku> skus = skuDao.selectByExample(skuQuery);
+            //doc.setField("price",skus.get(0));
+
+            solrServer.add(doc);
+            solrServer.commit();
         }
     }
 }

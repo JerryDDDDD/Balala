@@ -3,7 +3,9 @@ package com.layman.core.service.product;
 import cn.itcast.common.page.Pagination;
 import com.layman.core.bean.product.Color;
 import com.layman.core.bean.product.Product;
+import org.apache.solr.client.solrj.SolrServerException;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -21,5 +23,5 @@ public interface ProductService {
 
     public void insertProduct(Product product);
 
-    void isShow(Long[] ids);
+    void isShow(Long[] ids) throws IOException, SolrServerException;
 }
