@@ -64,6 +64,17 @@ public class Product implements Serializable {
      */
     private String packageList;
 
+    // 最低价
+    private float price;
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
     /**
      * 颜色集
      */

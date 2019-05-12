@@ -20,24 +20,19 @@
 		http://code.alibabatech.com/schema/dubbo
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <!-- Dobbo consumer -->
+    <!-- Dobbo provider -->
     <!-- 1.名字 区分计算机 名字唯一 -->
-    <dubbo:application name="balala-protal"/>
+    <dubbo:application name="balala-service-solr"/>
     <!-- 2.设置注册中心 地址 zookeeper地址 -->
-    <!--<dubbo:registry address="192.168.219.81:2181" protocol="zookeeper" />-->
-    <!-- 配置不去注册中心取服务 -->
-    <dubbo:registry address="N/A" protocol="zookeeper" check="false"></dubbo:registry>
+    <!--<dubbo:registry address="192.168.219.81:2181" protocol="zookeeper"></dubbo:registry>-->
+    <!-- 提供服务不注册 -->
+    <dubbo:registry address="N/A" protocol="zookeeper"></dubbo:registry>
     <!-- zookeeper 集群用逗号隔开 -->
     <!--<dubbo:registry address="192.168.219.81:2181,192.168.219.81:2181,192.168.219.81:2181" protocol="zookeeper"></dubbo:registry>-->
-    <!-- 全局设置 -->
-    <dubbo:consumer timeout="600000" check="false"></dubbo:consumer>
-    <!-- 3. 调用接口对应的实现类 timeout 超时时间 默认1000ms -->
-    <dubbo:reference interface="com.layman.core.service.TestTbService" url="dubbo://127.0.0.1:20880" id="testTbService" />
-    <dubbo:reference interface="com.layman.core.service.product.BrandService" url="dubbo://127.0.0.1:20880" id="brandService" />
-    <dubbo:reference interface="com.layman.core.service.product.UploadService" url="dubbo://127.0.0.1:20880" id="uploadService" />
-    <dubbo:reference interface="com.layman.core.service.product.ProductService" url="dubbo://127.0.0.1:20880" id="productService" />
-    <dubbo:reference interface="com.layman.core.service.product.SkuService" url="dubbo://127.0.0.1:20880" id="skuService" />
+    <!-- 3.对外提供服务的端口号 默认20880 -->
+    <dubbo:protocol port="20881" name="dubbo"/>
+    <!-- 4.暴露实现类 -->
+<!--    <dubbo:service interface="com.layman.core.service.TestTbService" ref="testTbServiceImpl"/>-->
+    <dubbo:service interface="com.layman.core.service.solr.SearchService" ref="searchServiceImpl"/>
 
-    <!-- 服务换成了Service-solr   -->
-    <dubbo:reference interface="com.layman.core.service.solr.SearchService" url="dubbo://127.0.0.1:20881" id="searchService" />
 </beans>

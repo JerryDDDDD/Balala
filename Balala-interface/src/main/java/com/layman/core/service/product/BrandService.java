@@ -27,4 +27,6 @@ public interface BrandService {
 
 
     List<Brand> selectBrandListByQuery(Integer isDisplay);
+
+    public List<Brand> selectBrandListFromRedis();
 }

@@ -8,8 +8,12 @@ import com.layman.core.service.product.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import redis.clients.jedis.Jedis;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @ClassName BrandServiceImpl
@@ -24,6 +28,9 @@ public class BrandServiceImpl implements BrandService {
 
     @Autowired
     private BrandDao brandDao;
+
+    @Autowired
+    private Jedis jedis;
 
     //查询分页对象
     public Pagination selectPaginationByQuery(String name, Integer isDisplay, Integer pageNo) {
@@ -71,8 +78,24 @@ public class BrandServiceImpl implements BrandService {
     // 修改
     @Override
     public void updateBrandById(Brand brand) {
+        jedis.hset("brand", String.valueOf(brand.getId()), brand.getName());
         brandDao.updateBrandById(brand);
     }
+
+    // 查询从Redis中
+    public List<Brand> selectBrandListFromRedis(){
+        List<Brand> brands = new ArrayList<Brand>();
+        Map<String, String> hgetAll = jedis.hgetAll("brand");
+        Set<Map.Entry<String, String>> entrySet = hgetAll.entrySet();
+        for (Map.Entry<String, String> entry : entrySet) {
+            Brand brand = new Brand();
+            brand.setId(Long.parseLong(entry.getKey()));
+            brand.setName(entry.getValue());
+            brands.add(brand);
+        }
+        return brands;
+    }
+
 
     // 删除
     @Override
