@@ -23,7 +23,7 @@
 
 <!--  redis 配置  -->
     <bean id="jedis" class="redis.clients.jedis.Jedis">
-        <constructor-arg value="192.168.219.90" index="0" type="java.lang.String"></constructor-arg>
+        <constructor-arg value="192.168.1.37" index="0" type="java.lang.String"></constructor-arg>
         <constructor-arg value="6379" index="1"></constructor-arg>
     </bean>
 

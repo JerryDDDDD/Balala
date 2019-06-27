@@ -39,11 +39,13 @@ public class ProductController {
 
     // 搜索
     @RequestMapping("/search")
-    public String search(Integer pageNo, String keyword, Model model) throws SolrServerException {
+    public String search(Integer pageNo, String keyword, Long brandId, String price, Model model) throws SolrServerException {
         //List<Product> products = searchService.selectProductListByQuery(keyword);
         // 查询结果集
         List<Brand> brands = brandService.selectBrandListFromRedis();
         model.addAttribute("brands", brands);
+        model.addAttribute("brandId", brandId);
+        model.addAttribute("price", price);
 
         Pagination pagination = searchService.selectPaginationByQuery(pageNo, keyword);
         model.addAttribute("pagination", pagination);

@@ -16,4 +16,6 @@ import java.util.List;
 public interface SearchService {
 //    public List<Product> selectProductListByQuery(Integer pageNo ,String keyword) throws SolrServerException;
     public Pagination selectPaginationByQuery(Integer pageNo, String keyword) throws SolrServerException;
+
+    public void insertProductToSolr(Long id);
 }

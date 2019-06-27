@@ -20,6 +20,8 @@
 		http://code.alibabatech.com/schema/dubbo
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
+    <context:property-placeholder location="classpath*:properties/database.properties"></context:property-placeholder>
+
     <!-- 数据库连接池 druid -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
         <!-- 请求的驱动 -->

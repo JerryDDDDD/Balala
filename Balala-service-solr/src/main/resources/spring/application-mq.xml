@@ -1,0 +1,65 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/task
+   		http://www.springframework.org/schema/task/spring-task-4.0.xsd
+		http://code.alibabatech.com/schema/dubbo
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--  activemq配置  -->
+    <!--  原厂商提供  -->
+    <bean class="org.apache.activemq.ActiveMQConnectionFactory" id="activeMQConnectionFactory">
+        <!-- 设置链接 -->
+        <property name="brokerURL" value="tcp://192.168.1.37:61616"></property>
+        <!-- 用户名 -->
+        <property name="userName" value="admin"></property>
+        <!-- 密码 -->
+        <property name="password" value="admin"></property>
+    </bean>
+    <!-- 工厂连接池 -->
+    <bean class="org.apache.activemq.pool.PooledConnectionFactoryBean" id="pooledConnectionFactoryBean">
+        <!-- 链接池 -->
+        <property name="connectionFactory" ref="activeMQConnectionFactory"></property>
+        <!-- 最大连接数 -->
+        <property name="maxConnections" value="5"></property>
+    </bean>
+    <!-- Spring 管理上面的工厂 -->
+    <bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+        <!-- 注入上面的工厂链接 -->
+        <property name="targetConnectionFactory" ref="pooledConnectionFactoryBean"></property>
+    </bean>
+
+    <!-- JmsTemplate 由Spring提供 -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory"></property>
+        <!-- 默认目标 -->
+        <property name="defaultDestinationName" value="productId"></property>
+    </bean>
+
+    <!-- 处理消息的类 -->
+    <bean id="messageListener" class="com.layman.core.message.CustomerMessageListener"></bean>
+
+    <!-- Spring 监听器 检测消息队列中是否有消息 -->
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <!-- 链接上ActiveMq -->
+        <property name="connectionFactory" ref="connectionFactory"></property>
+        <!-- 监听的目标 -->
+        <property name="destinationName" value="productId"/>
+        <!-- 监听到消息之后,有个类处理此消息 处理回掉消息的类 -->
+        <property name="messageListener" ref="messageListener"/>
+    </bean>
+</beans>

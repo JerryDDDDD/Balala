@@ -3,6 +3,10 @@ package com.layman.core.service;
 import cn.itcast.common.page.Pagination;
 import com.layman.core.bean.product.Product;
 import com.layman.core.bean.product.ProductQuery;
+import com.layman.core.bean.product.Sku;
+import com.layman.core.bean.product.SkuQuery;
+import com.layman.core.dao.product.ProductDao;
+import com.layman.core.dao.product.SkuDao;
 import com.layman.core.service.solr.SearchService;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
@@ -10,10 +14,12 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.params.SolrParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +36,12 @@ public class SearchServiceImpl implements SearchService {
 
     @Autowired
     private SolrServer solrServer;
+
+    @Autowired
+    private ProductDao productDao;
+
+    @Autowired
+    private SkuDao skuDao;
 
     // 全文搜索
 //    public List<Product> selectProductListByQuery(String keyword) throws SolrServerException {
@@ -132,5 +144,33 @@ public class SearchServiceImpl implements SearchService {
         String url = "/search?keyword";
         pagination.pageView(url, params.toString());
         return pagination;
+    }
+
+    // 保存商品信息到Solr服务器
+    public void insertProductToSolr(Long id) {
+        // 保存商品信息到Solr服务器
+        SolrInputDocument doc = new SolrInputDocument();
+        // 商品ID 图片 价格 商品名称 品牌id 时间 可选
+        doc.setField("id", id);
+        Product p = productDao.selectByPrimaryKey(id);
+        doc.setField("name_ik", p.getName());
+        doc.setField("url", p.getImages()[0]);
+        // 查询售价
+        SkuQuery skuQuery = new SkuQuery();
+        skuQuery.createCriteria().andProductIdEqualTo(id);
+        skuQuery.setOrderByClause("price asc");
+        skuQuery.setPageNo(1);
+        skuQuery.setPageSize(1);
+        List<Sku> skus = skuDao.selectByExample(skuQuery);
+        doc.setField("price", skus.get(0));
+
+        try {
+            solrServer.add(doc);
+            solrServer.commit();
+        } catch (SolrServerException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

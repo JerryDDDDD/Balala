@@ -21,8 +21,16 @@
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
 
-        <!--  solr 配置  -->
-        <bean id="solrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
-            <constructor-arg value="http://192.168.1.37:8080/solr"/>
-        </bean>
+    <!-- sqlSessionFactory 工厂 -->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 注入数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 配置Mybatis核心配置文件所在的位置 -->
+        <!--<property name="configLocation" value="classpath*:mybatis-config.xml"></property>-->
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 扫描的包 -->
+        <property name="basePackage" value="com.layman.core.dao"/>
+    </bean>
 </beans>
