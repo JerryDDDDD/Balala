@@ -37,7 +37,7 @@ window.pageConfig = {
 	}
 };
 $(function(){
-	//
+	// 初始化加载
 	$("#colors a:first").trigger("click");
 });
 //全局变量
@@ -49,6 +49,7 @@ function colorToRed(target,id){
 	colorId = id;
 	//清理红色
 	//所有颜色 a 标签 全部变成白色
+	// $("#colors div").attr("class", "item");
 	$("#colors div").removeClass("selected");
 	$(target).addClass("selected");
 	
