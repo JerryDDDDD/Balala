@@ -213,9 +213,9 @@ public class Product implements Serializable {
     }
 
 
-    public String[] getImages() {
-        return imgUrl.split(",");
-    }
+//    public String[] getImages() {
+//        return imgUrl.split(",");
+//    }
 
     @Override
     public String toString() {

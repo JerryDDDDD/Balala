@@ -61,5 +61,7 @@
         <property name="destinationName" value="productId"/>
         <!-- 监听到消息之后,有个类处理此消息 处理回掉消息的类 -->
         <property name="messageListener" ref="messageListener"/>
+        <!-- 默认是点对点 false  改为发布订阅模式 true -->
+        <property name="pubSubDomain" value="true" />
     </bean>
 </beans>

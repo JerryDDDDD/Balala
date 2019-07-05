@@ -48,6 +48,9 @@
         <property name="connectionFactory" ref="connectionFactory"></property>
         <!-- 默认目标 -->
         <property name="defaultDestinationName" value="productId"></property>
+        <!-- 默认点对点 false /  true 为订阅发布模式 -->
+        <property name="pubSubDomain" value="true"></property>
+
     </bean>
 
 <!--    &lt;!&ndash; 处理消息的类 &ndash;&gt;-->
@@ -62,4 +65,19 @@
 <!--        &lt;!&ndash; 监听到消息之后,有个类处理此消息 处理回掉消息的类 &ndash;&gt;-->
 <!--        <property name="messageListener"-->
 <!--    </bean>-->
+
+    <!-- 处理消息的类 -->
+    <bean id="messageListener" class="com.layman.core.message.CustomerMessageListener"></bean>
+
+    <!-- Spring 监听器 检测消息队列中是否有消息 -->
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <!-- 链接上ActiveMq -->
+        <property name="connectionFactory" ref="connectionFactory"></property>
+        <!-- 监听的目标 -->
+        <property name="destinationName" value="productId"/>
+        <!-- 监听到消息之后,有个类处理此消息 处理回掉消息的类 -->
+        <property name="messageListener" ref="messageListener"/>
+        <!-- 默认是点对点 false  改为发布订阅模式 true -->
+        <property name="pubSubDomain" value="true" />
+    </bean>
 </beans>

@@ -17,17 +17,13 @@ import javax.jms.MessageListener;
  **/
 public class CustomerMessageListener implements MessageListener {
 
-    @Autowired
-    private SearchService searchService;
-
     @Override
     public void onMessage(Message message) {
         ActiveMQTextMessage am = (ActiveMQTextMessage) message;
+
         try {
-            System.out.println("ActiveMq 中的消息是-solr:" + am.getText());
-            // 处理信息
-            // 保存信息到Solr服务器
-            searchService.insertProductToSolr(Long.valueOf(am.getText()));
+            System.out.println("ActiveMq 中的消息是-cms:" + am.getText());
+
         } catch (JMSException e) {
             e.printStackTrace();
         }
