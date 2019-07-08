@@ -11,4 +11,7 @@ public interface Constants {
 
     // 图片服务器Ip
     public static final String IMAGE_URL = "http://118.24.27.161:8081/";
+
+    // 用户名
+    public static final String USER_NAME = "USER_NAME";
 }

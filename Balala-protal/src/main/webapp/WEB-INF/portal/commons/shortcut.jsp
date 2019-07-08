@@ -1,4 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<script type="text/javascript" src="/js/jquery-1.6.4.js"></script>
+<script type="text/javascript">
+	//去登录页面
+	function login() {
+		// window.location.href ==> 当前浏览器请求路径
+		window.location.href = "http://127.0.0.1:8003/login.aspx?returnUrl=" + window.location.href;
+	}
+</script>
 <div id="shortcut-2013">
 	<div class="w">
 		<ul class="fl lh">
